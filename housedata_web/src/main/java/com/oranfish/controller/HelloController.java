@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/hello")
 public class HelloController {
 
-    private Logger logger = LoggerFactory.getLogger(HelloController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
 
     @Autowired
     private HelloService helloService;
@@ -26,8 +26,7 @@ public class HelloController {
     public String getHello( @PathVariable("name") String name, Model model){
         String hello = helloService.getHello();
         model.addAttribute("result", hello + "，" + name);
-        logger.debug(houseService.getCount().toString());
-        logger.info(houseService.getCount().toString());
+        LOG.info(houseService.getCount().toString());
         return "hello";
     }
 
