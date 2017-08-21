@@ -12,6 +12,7 @@
         <module>housedata_dao</module>
         <module>housedata_service</module>
         <module>housedata_web</module>
+        <module>housedata_common</module>
     </modules>
 
     <properties>
