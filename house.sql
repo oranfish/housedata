@@ -1,4 +1,4 @@
-CREATE TABLE `house` (
+CREATE TABLE `house_sh` (
 `id`  long NOT NULL ,
 `date`  datetime NULL COMMENT '数据入库时间' ,
 `title`  varchar(255) NULL COMMENT '标题' ,
