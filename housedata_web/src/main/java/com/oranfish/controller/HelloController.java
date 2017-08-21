@@ -2,6 +2,8 @@ package com.oranfish.controller;
 
 import com.oranfish.service.HelloService;
 import com.oranfish.service.HouseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/hello")
 public class HelloController {
 
+    private Logger logger = LoggerFactory.getLogger(HelloController.class);
+
     @Autowired
     private HelloService helloService;
     @Autowired
@@ -22,7 +26,8 @@ public class HelloController {
     public String getHello( @PathVariable("name") String name, Model model){
         String hello = helloService.getHello();
         model.addAttribute("result", hello + "，" + name);
-        System.out.println(houseService.getCount());
+        logger.debug(houseService.getCount().toString());
+        logger.info(houseService.getCount().toString());
         return "hello";
     }
 
