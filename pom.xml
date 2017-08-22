@@ -13,6 +13,7 @@
         <module>housedata_service</module>
         <module>housedata_web</module>
         <module>housedata_common</module>
+        <module>housedata_task</module>
     </modules>
 
     <properties>

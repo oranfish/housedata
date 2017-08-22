@@ -1,5 +1,5 @@
 package com.oranfish.service;
 
 public interface HouseService {
-    Integer getCount();
+    Integer getTodayCount();
 }
