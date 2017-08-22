@@ -1,6 +1,5 @@
 package com.oranfish.controller;
 
-import com.oranfish.service.HelloService;
 import com.oranfish.service.HouseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,14 +17,11 @@ public class HelloController {
     private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
 
     @Autowired
-    private HelloService helloService;
-    @Autowired
     private HouseService houseService;
 
     @GetMapping("/{name}")
     public String getHello( @PathVariable("name") String name, Model model){
-        String hello = helloService.getHello();
-        model.addAttribute("result", hello + "，" + name);
+        model.addAttribute("result", "helloworld，" + name);
         LOG.info(houseService.getCount().toString());
         return "hello";
     }
