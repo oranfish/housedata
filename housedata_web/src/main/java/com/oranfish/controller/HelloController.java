@@ -1,8 +1,6 @@
 package com.oranfish.controller;
 
-import com.oranfish.common.DateUtils;
 import com.oranfish.service.HouseService;
-import com.oranfish.task.HouseTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +18,10 @@ public class HelloController {
 
     @Autowired
     private HouseService houseService;
-    @Autowired
-    private HouseTask houseTask;
 
     @GetMapping("/{name}")
     public String getHello( @PathVariable("name") String name, Model model){
         model.addAttribute("result", "helloworld，" + name);
-        houseTask.doTask();
         LOG.info(houseService.getTodayCount().toString());
         return "hello";
     }

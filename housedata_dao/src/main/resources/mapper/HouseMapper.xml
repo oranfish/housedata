@@ -12,4 +12,13 @@
             </if>
         </where>
     </select>
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into house(`date`, title, total_price, unit_price, house_detail, community_detail, label)
+        values
+        <foreach collection="houseList" item="item" separator="," >
+            (now(), #{item.title, jdbcType = VARCHAR}, #{item.totalPrice, jdbcType = DECIMAL},
+            #{item.unitPrice, jdbcType = DECIMAL}, #{item.houseDetail, jdbcType = VARCHAR},
+            #{item.communityDetail, jdbcType = VARCHAR}, #{item.label, jdbcType = VARCHAR})
+        </foreach>
+    </insert>
 </mapper>
