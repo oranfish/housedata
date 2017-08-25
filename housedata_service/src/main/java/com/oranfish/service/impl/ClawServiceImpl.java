@@ -22,7 +22,14 @@ public class ClawServiceImpl implements ClawService{
     public Integer getTotalPage(String url) {
         String htmlContent = HttpUtils.getPageContent(url);
         Document document = Jsoup.parse(htmlContent);
+        String span = document.select(".c-pagination span").text();
+        if(StringUtils.isBlank(span)){
+            return null;
+        }
         Elements as = document.select(".c-pagination a");
+        if(as == null || as.isEmpty()){
+            return 1;
+        }
         Iterator iterator = as.iterator();
         while(iterator.hasNext()){
             Element a = (Element)iterator.next();
