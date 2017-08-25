@@ -35,7 +35,7 @@
     </dependencies>
 
     <build>
-        <finalName>housedata_web</finalName>
+        <finalName>housedata</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
