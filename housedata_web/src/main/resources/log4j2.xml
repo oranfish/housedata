@@ -45,6 +45,8 @@
             <appender-ref ref="Console"/>
         </logger>
 -->
+        <logger name="com.oranfish.dao" level="debug">
+        </logger>
         <root level="info" includeLocation="true">
             <appender-ref ref="Console"/>
         </root>

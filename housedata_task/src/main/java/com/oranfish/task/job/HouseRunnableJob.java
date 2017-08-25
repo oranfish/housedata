@@ -2,6 +2,7 @@ package com.oranfish.task.job;
 
 import com.oranfish.entity.House;
 import com.oranfish.service.ClawService;
+import com.oranfish.service.HouseService;
 import com.oranfish.service.impl.ClawServiceImpl;
 
 import java.util.List;
@@ -12,7 +13,6 @@ public class HouseRunnableJob implements Runnable{
     private String url;
     private List<House> list;
     private CountDownLatch cdl;
-
     private ClawService clawService = new ClawServiceImpl();
 
     public HouseRunnableJob(String url, List<House> list, CountDownLatch cdl){
