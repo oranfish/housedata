@@ -34,10 +34,12 @@ public class HouseTask {
         LOG.info("开始任务");
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
         List<String> levelOneList = clawService.getLevelOnePart(lianjiaUrl + "/ershoufang/");
-        for(String levelOne : levelOneList){
-            List<String> levelTwoList = clawService.getLevelTwoPart(lianjiaUrl + levelOne);
-            for(String levelTwo : levelTwoList){
-                clawData(lianjiaUrl + levelTwo, fixedThreadPool);
+        if(levelOneList != null && !levelOneList.isEmpty()){
+            for(String levelOne : levelOneList){
+                List<String> levelTwoList = clawService.getLevelTwoPart(lianjiaUrl + levelOne);
+                for(String levelTwo : levelTwoList){
+                    clawData(lianjiaUrl + levelTwo, fixedThreadPool);
+                }
             }
         }
         fixedThreadPool.shutdown();

@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpUtils {
-    public static String getPageContent(String url){
+    private static String getPageContent(String url){
         String result = null;
         BufferedReader in = null;
         try {
@@ -34,5 +34,22 @@ public class HttpUtils {
             }
         }
         return result;
+    }
+
+    public static String getPageContentRepeatedly(String url){
+        String htmlContent = null;
+        for(int i = 0; i < 20; i ++){
+            htmlContent = getPageContent(url);
+            if(htmlContent == null){
+                try {
+                    Thread.sleep(300000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                break;
+            }
+        }
+        return htmlContent;
     }
 }

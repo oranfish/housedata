@@ -9,6 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,8 +21,13 @@ import java.util.List;
 @Service
 public class ClawServiceImpl implements ClawService{
 
+    private static final Logger LOG = LoggerFactory.getLogger(ClawServiceImpl.class);
+
     public Integer getTotalPage(String url) {
-        String htmlContent = HttpUtils.getPageContent(url);
+        String htmlContent = HttpUtils.getPageContentRepeatedly(url);
+        if(htmlContent == null){
+            return null;
+        }
         Document document = Jsoup.parse(htmlContent);
         String span = document.select(".c-pagination span").text();
         if(StringUtils.isBlank(span)){
@@ -50,7 +57,10 @@ public class ClawServiceImpl implements ClawService{
     }
 
     public List<House> getPaginateData(String url) {
-        String htmlContent = HttpUtils.getPageContent(url);
+        String htmlContent = HttpUtils.getPageContentRepeatedly(url);
+        if(htmlContent == null){
+            return null;
+        }
         Document document = Jsoup.parse(htmlContent);
         Elements lis = document.select(".js_fang_list li");
         List<House> list = new ArrayList<House>();
@@ -74,7 +84,10 @@ public class ClawServiceImpl implements ClawService{
     }
 
     public List<String> getLevelOnePart(String url) {
-        String htmlContent = HttpUtils.getPageContent(url);
+        String htmlContent = HttpUtils.getPageContentRepeatedly(url);
+        if(htmlContent == null){
+            return null;
+        }
         Document document = Jsoup.parse(htmlContent);
         Elements as = document.select("#plateList div[class=level1] a");
         List<String> hrefList = new ArrayList<String>();
@@ -82,13 +95,17 @@ public class ClawServiceImpl implements ClawService{
             String href = a.attr("href");
             if(!url.endsWith(href)){
                 hrefList.add(href);
+                LOG.info("一级链接：{}", href);
             }
         }
         return hrefList;
     }
 
     public List<String> getLevelTwoPart(String url) {
-        String htmlContent = HttpUtils.getPageContent(url);
+        String htmlContent = HttpUtils.getPageContentRepeatedly(url);
+        if(htmlContent == null){
+            return null;
+        }
         Document document = Jsoup.parse(htmlContent);
         Elements divs = document.select("#plateList .level2 .level2-item");
         List<String> hrefList = new ArrayList<String>();
@@ -97,6 +114,7 @@ public class ClawServiceImpl implements ClawService{
             System.out.println(href);
             if(!url.endsWith(href)){
                 hrefList.add(href);
+                LOG.info("二级链接：{}", href);
             }
         }
         return hrefList;
