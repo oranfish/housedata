@@ -42,7 +42,7 @@ public class HttpUtils {
             htmlContent = getPageContent(url);
             if(htmlContent == null){
                 try {
-                    Thread.sleep(300000);
+                    Thread.sleep(30000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
