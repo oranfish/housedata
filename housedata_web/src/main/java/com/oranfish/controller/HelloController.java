@@ -21,7 +21,7 @@ public class HelloController {
 
     @GetMapping("/{name}")
     public String getHello( @PathVariable("name") String name, Model model){
-        model.addAttribute("result", "helloworld，" + name);
+        model.addAttribute("result", "helloworld，" + name + "============");
         LOG.info(houseService.getTodayCount().toString());
         return "hello";
     }

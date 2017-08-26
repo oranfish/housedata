@@ -73,11 +73,10 @@ public class ClawServiceImpl implements ClawService{
         return list;
     }
 
-    public List<String> getPart(String url, int level) {
+    public List<String> getLevelOnePart(String url) {
         String htmlContent = HttpUtils.getPageContent(url);
-        System.out.println(url);
         Document document = Jsoup.parse(htmlContent);
-        Elements as = document.select(".gio_plate div[class=level" + level + "-item] a");
+        Elements as = document.select("#plateList div[class=level1] a");
         List<String> hrefList = new ArrayList<String>();
         for(Element a : as){
             String href = a.attr("href");
@@ -88,4 +87,18 @@ public class ClawServiceImpl implements ClawService{
         return hrefList;
     }
 
+    public List<String> getLevelTwoPart(String url) {
+        String htmlContent = HttpUtils.getPageContent(url);
+        Document document = Jsoup.parse(htmlContent);
+        Elements divs = document.select("#plateList .level2 .level2-item");
+        List<String> hrefList = new ArrayList<String>();
+        for(Element div : divs){
+            String href =  div.select("a").attr("href");
+            System.out.println(href);
+            if(!url.endsWith(href)){
+                hrefList.add(href);
+            }
+        }
+        return hrefList;
+    }
 }

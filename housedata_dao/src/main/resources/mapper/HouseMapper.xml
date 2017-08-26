@@ -21,4 +21,33 @@
             #{item.communityDetail, jdbcType = VARCHAR}, #{item.label, jdbcType = VARCHAR})
         </foreach>
     </insert>
+    <select id="countSingleHouse" resultType="java.lang.Integer" >
+        select count(1) from house
+        <where>
+            <if test="beginTime != null">
+                AND date &gt;= #{beginTime, jdbcType = TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                AND date &lt; #{endTime, jdbcType = TIMESTAMP}
+            </if>
+            <if test="house.title != null">
+                AND title = #{house.title, jdbcType = VARCHAR}
+            </if>
+            <if test="house.totalPrice != null">
+                AND total_price = #{house.totalPrice, jdbcType = DECIMAL}
+            </if>
+            <if test="house.unitPrice != null">
+                AND unit_price = #{house.unitPrice, jdbcType = DECIMAL}
+            </if>
+            <if test="house.houseDetail != null">
+                AND house_detail = #{house.houseDetail, jdbcType = VARCHAR}
+            </if>
+            <if test="house.communityDetail != null">
+                AND community_detail = #{house.communityDetail, jdbcType = VARCHAR}
+            </if>
+            <if test="house.label != null">
+                AND label = #{house.label, jdbcType = VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>

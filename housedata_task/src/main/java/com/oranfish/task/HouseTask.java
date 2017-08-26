@@ -32,18 +32,15 @@ public class HouseTask {
     @Scheduled(cron="${cron}")
     public void doTask(){
         LOG.info("开始任务");
-        Integer todayCount = houseService.getTodayCount();
-        if(todayCount != null && todayCount == 0){
-            ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
-            List<String> levelOneList = clawService.getPart(lianjiaUrl + "/ershoufang/", 1);
-            for(String levelOne : levelOneList){
-                List<String> levelTwoList = clawService.getPart(lianjiaUrl + levelOne, 2);
-                for(String levelTwo : levelTwoList){
-                    clawData(lianjiaUrl + levelTwo, fixedThreadPool);
-                }
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
+        List<String> levelOneList = clawService.getLevelOnePart(lianjiaUrl + "/ershoufang/");
+        for(String levelOne : levelOneList){
+            List<String> levelTwoList = clawService.getLevelTwoPart(lianjiaUrl + levelOne);
+            for(String levelTwo : levelTwoList){
+                clawData(lianjiaUrl + levelTwo, fixedThreadPool);
             }
-            fixedThreadPool.shutdown();
         }
+        fixedThreadPool.shutdown();
         LOG.info("结束任务");
     }
 
