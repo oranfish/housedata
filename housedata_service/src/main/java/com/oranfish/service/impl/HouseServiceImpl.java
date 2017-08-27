@@ -35,6 +35,8 @@ public class HouseServiceImpl implements HouseService{
                     if(houseCount != null && houseCount > 0){
                         iterator.remove();
                     }
+                }else{
+                    iterator.remove();
                 }
             }
             if(houseList != null && !houseList.isEmpty()){
