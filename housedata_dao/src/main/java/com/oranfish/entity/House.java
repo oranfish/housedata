@@ -90,4 +90,17 @@ public class House {
                 ", label='" + label + '\'' +
                 '}';
     }
+
+    public boolean equalsByContent(House house) {
+        if(this.title.equals(house.getTitle())
+            && this.totalPrice.compareTo(house.getTotalPrice()) == 0
+            && this.unitPrice.compareTo(house.getUnitPrice()) == 0
+            && this.houseDetail.equals(house.getHouseDetail())
+            && this.communityDetail.equals(house.getCommunityDetail())
+            && this.label.equals(house.getLabel())){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
