@@ -24,13 +24,7 @@ public class HouseRunnableJob implements Runnable{
     public void run() {
         List<House> paginateDataList = clawService.getPaginateData(url);
         if(paginateDataList != null && !paginateDataList.isEmpty()){
-            for(House baseHouse : list){
-                for(House paginateHouse : paginateDataList){
-                    if(!baseHouse.equalsByContent(paginateHouse)){
-                        list.add(paginateHouse);
-                    }
-                }
-            }
+            list.addAll(paginateDataList);
         }
         cdl.countDown();
     }

@@ -12,6 +12,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -50,7 +52,7 @@ public class HouseTask {
     private void clawData(String dataUrl, ExecutorService fixedThreadPool){
         Integer totalPages = clawService.getTotalPage(dataUrl);
         if(totalPages != null && totalPages > 0){
-            List<House> list = new ArrayList<House>();
+            List<House> list = Collections.synchronizedList(new ArrayList<House>());
             CountDownLatch cdl = new CountDownLatch(totalPages);
             for(int i = 1; i <= totalPages; i++){
                 HouseRunnableJob job = new HouseRunnableJob(dataUrl + "/d" + i, list, cdl);
