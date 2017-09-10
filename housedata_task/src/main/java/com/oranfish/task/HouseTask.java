@@ -60,8 +60,7 @@ public class HouseTask {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            houseService.batchInsert(new ArrayList(new HashSet(list)));
+            houseService.batchInsert(list);
         }
     }
 }
