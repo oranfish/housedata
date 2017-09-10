@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,7 +60,8 @@ public class HouseTask {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            houseService.batchInsert(list);
+
+            houseService.batchInsert(new ArrayList(new HashSet(list)));
         }
     }
 }

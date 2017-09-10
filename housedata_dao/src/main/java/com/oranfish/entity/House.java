@@ -91,7 +91,9 @@ public class House {
                 '}';
     }
 
-    public boolean equalsByContent(House house) {
+    @Override
+    public boolean equals(Object obj) {
+        House house = (House)obj;
         if(this.title.equals(house.getTitle())
             && this.totalPrice.compareTo(house.getTotalPrice()) == 0
             && this.unitPrice.compareTo(house.getUnitPrice()) == 0
@@ -102,5 +104,11 @@ public class House {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        String in = this.title + this.totalPrice + this.unitPrice + this.houseDetail + this.communityDetail + this.label;
+        return in.hashCode();
     }
 }
