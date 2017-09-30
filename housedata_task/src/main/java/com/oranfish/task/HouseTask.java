@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -29,6 +30,7 @@ public class HouseTask {
     private String lianjiaUrl;
 
     @Scheduled(cron="${cron}")
+    @PostConstruct
     public void doTask(){
         LOG.info("开始任务");
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
