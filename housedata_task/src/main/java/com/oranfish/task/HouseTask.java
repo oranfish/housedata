@@ -30,7 +30,6 @@ public class HouseTask {
     private String lianjiaUrl;
 
     @Scheduled(cron="${cron}")
-    @PostConstruct
     public void doTask(){
         LOG.info("开始任务");
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
@@ -64,5 +63,10 @@ public class HouseTask {
             }
             houseService.batchInsert(list);
         }
+    }
+
+    @PostConstruct
+    private void initJob(){
+        doTask();
     }
 }
