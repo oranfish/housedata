@@ -67,6 +67,11 @@ public class HouseTask {
 
     @PostConstruct
     private void initJob(){
-        doTask();
+        new Thread(){
+            @Override
+            public void run() {
+                doTask();
+            }
+        }.start();
     }
 }
