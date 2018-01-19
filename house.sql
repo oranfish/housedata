@@ -9,4 +9,4 @@ CREATE TABLE `house` (
   `label` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_all` (`title`,`house_detail`,`community_detail`,`label`)
-) ENGINE=InnoDB AUTO_INCREMENT=143827 DEFAULT CHARSET=utf8;
+);
